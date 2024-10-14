@@ -5,7 +5,7 @@ import links from "./Url_Link.json" assert { type: "json" };
 import Utils from "./CommonUtil.js";
 
 const Scrapper = {
-  getSeasonalAnime: async (baseURL) => {
+  getSeasonalAnime: async (baseURL, retType) => {
     const link = baseURL + links.seasonal_anime;
     const cacheData = await Utils.setCacheIfNotAndSendRes(link, 60 * 60 * 24);
     // const htmlData = await RequestExecutor.getRequest(link);
@@ -46,9 +46,7 @@ const Scrapper = {
         anime_url,
       });
     });
-
-    // return anime_card_list.html();
-    return anime_data_list;
+    return retType === undefined ? anime_data_list : anime_card_list.html();
   },
 };
 export default Scrapper;
